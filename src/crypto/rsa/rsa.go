@@ -534,7 +534,7 @@ func EncryptOAEP(hash hash.Hash, random io.Reader, pub *PublicKey, msg []byte, l
 		if err != nil {
 			return nil, err
 		}
-		return boring.EncryptRSAOAEP(hash, hash, bkey, msg, label)
+		return boring.EncryptRSAOAEP(hash, bkey, msg, label)
 	}
 	boring.UnreachableExceptTests()
 
@@ -724,7 +724,7 @@ func decryptOAEP(hash, mgfHash hash.Hash, random io.Reader, priv *PrivateKey, ci
 		if err != nil {
 			return nil, err
 		}
-		out, err := boring.DecryptRSAOAEP(hash, mgfHash, bkey, ciphertext, label)
+		out, err := boring.DecryptRSAOAEP(hash, bkey, ciphertext, label)
 		if err != nil {
 			return nil, ErrDecryption
 		}
